@@ -9,8 +9,8 @@ import tempfile
 import requests
 from pathlib import Path
 from http import HTTPStatus
-from examples.annotations_to_animation import annotations_to_animation
-from examples.image_to_annotations import image_to_annotations
+from annotations_to_animation import annotations_to_animation
+from image_to_annotations import image_to_annotations
 from pkg_resources import resource_filename
 import oss2
 
@@ -108,7 +108,8 @@ def imageToAnnotations(imgUrl):
     if os.path.exists(imgFile):
         print(imgFile)
     print("处理图片")
-    image_to_annotations(imgFile, char_dir)
+    config = loadConfig("ad")
+    image_to_annotations(imgFile, char_dir, config.get('host'))
     return char_dir
 
 
