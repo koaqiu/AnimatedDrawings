@@ -8,9 +8,9 @@ from pathlib import Path
 import sys
 import yaml
 from pkg_resources import resource_filename
+import utils
 
-
-def annotations_to_animation(char_anno_dir: str, motion_cfg_fn: str, retarget_cfg_fn: str, outFile:str):
+def annotations_to_animation(char_anno_dir: str, motion_cfg_fn: str, retarget_cfg_fn: str, background:str, outFile:str):
     """
     Given a path to a directory with character annotations, a motion configuration file, and a retarget configuration file,
     creates an animation and saves it to {annotation_dir}/video.png
@@ -32,7 +32,9 @@ def annotations_to_animation(char_anno_dir: str, motion_cfg_fn: str, retarget_cf
             'OUTPUT_VIDEO_PATH': outFile # str(Path(char_anno_dir, 'video.gif').resolve())}  # set the output location
         }
     }
-
+    if utils.isNotEmptyString(background):
+        mvc_cfg.get('view')['BACKGROUND_IMAGE'] = background
+    
     # write the new mvc config file out
     output_mvc_cfn_fn = str(Path(char_anno_dir, 'mvc_cfg.yaml'))
     with open(output_mvc_cfn_fn, 'w') as f:

@@ -24,3 +24,4 @@ examples/garlic_out
 !media/*.gif
 
 examples/*_out
+service/config/prod/*

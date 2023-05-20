@@ -1,0 +1,1 @@
+docker run -v%cd%\config\prod:/root/AnimatedDrawings/service/config -d -p5000:5000 --rm ad:done
